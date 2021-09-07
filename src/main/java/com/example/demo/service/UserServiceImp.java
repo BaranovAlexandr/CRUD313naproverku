@@ -44,12 +44,10 @@ public class UserServiceImp implements UserService {
    @Override
    public void update(User user) {
       User lastUser = userDao.getUserByUsername(user.getUsername());
-      if (lastUser.getPassword().equals(user.getPassword()) ) {
-         userDao.update(user);
-      } else {
+      if (!lastUser.getPassword().equals(user.getPassword())) {
          user.setPassword(passwordEncoder.encode(user.getPassword()));
-         userDao.update(user);
       }
+      userDao.update(user);
    }
 
    @Override
