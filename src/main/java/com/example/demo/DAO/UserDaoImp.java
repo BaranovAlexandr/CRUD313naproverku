@@ -1,21 +1,14 @@
 package com.example.demo.DAO;
 
 import com.example.demo.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.util.List;
 
+
 @Repository
-
 public class UserDaoImp implements UserDao {
-
-
-
-
 
    @PersistenceContext
    private EntityManager entityManager;
@@ -27,15 +20,15 @@ public class UserDaoImp implements UserDao {
 
    @Override
    public List<User> listUsers() {
-      Query query = entityManager.createQuery("SELECT u From User u",User.class);
-      return query.getResultList();
+      return entityManager.createQuery("SELECT u From User u",User.class)
+      .getResultList();
    }
 
    @Override
    public User getUserById(Long id){
-      Query query = entityManager.createQuery("Select e FROM User e WHERE e.id = :id");
-      query.setParameter("id", id);
-      return (User) query.getSingleResult();
+      return (User) entityManager.createQuery("Select e FROM User e WHERE e.id = :id")
+              .setParameter("id", id)
+              .getSingleResult();
    }
 
    @Override
@@ -50,9 +43,8 @@ public class UserDaoImp implements UserDao {
 
    @Override
    public User getUserByUsername(String username) {
-      Query query = entityManager.createQuery("Select e FROM User e WHERE e.username = :username");
-      query.setParameter("username", username);
-      return (User) query.getSingleResult();
+      return (User) entityManager.createQuery("Select e FROM User e WHERE e.username = :username")
+              .setParameter("username", username)
+              .getSingleResult();
    }
-
 }

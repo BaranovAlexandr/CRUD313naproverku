@@ -61,14 +61,12 @@ public class UserServiceImp implements UserService {
    }
 
    @Override
-   public String[] getStringRolesByUsername(String username){
-      User user = userDao.getUserByUsername(username);
-      Set<Role> roles = user.getRoles();
-      String[] stringRoles = new String[roles.size()];
-      int i = 0;
+   public String getStringRolesByUsername(String username){
+      Set<Role> roles = userDao.getUserByUsername(username).getRoles();
+      StringBuilder userRoles = new StringBuilder();
       for (Role role : roles) {
-         stringRoles[i++] = role.getRole();
+         userRoles.append(role.getRole()).append(" ");
       }
-      return stringRoles;
+      return userRoles.toString();
    }
 }

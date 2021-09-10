@@ -12,5 +12,5 @@ public interface UserService {
     void update(User user);
     void delete(Long id);
     User getUserByUsername(String username);
-    String[] getStringRolesByUsername(String username);
+    String getStringRolesByUsername(String username);
 }

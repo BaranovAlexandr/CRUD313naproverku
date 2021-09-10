@@ -5,14 +5,14 @@ import com.example.demo.model.User;
 import com.example.demo.service.RoleService;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
 import java.util.HashSet;
 import java.util.Set;
 
+
 @Component
-public class UserInitialization {
+public class UserInitialization implements CommandLineRunner {
 
     private final UserService userService;
     private final RoleService roleService;
@@ -23,8 +23,8 @@ public class UserInitialization {
         this.roleService = roleService;
     }
 
-    @PostConstruct
-    public void init() {
+    @Override
+    public void run(String... args) throws Exception {
         roleService.addRole(new Role("ROLE_ADMIN"));
         roleService.addRole(new Role("ROLE_USER"));
 

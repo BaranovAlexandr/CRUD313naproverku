@@ -1,9 +1,8 @@
 package com.example.demo.DAO;
 
 import com.example.demo.model.User;
-
-
 import java.util.List;
+
 
 public interface UserDao {
    void add(User user);
