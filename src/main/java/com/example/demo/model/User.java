@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
@@ -23,8 +24,9 @@ public class User implements UserDetails {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "username", unique = true)
-    private String username;
+    @Email
+    @Column(name = "email", unique = true)
+    private String email;
 
     @Column(name = "password")
     private String password;
@@ -48,8 +50,8 @@ public class User implements UserDetails {
 
 
 
-    public User(String username, String password, String name, String surname, int age, Set<Role> roles) {
-        this.username = username;
+    public User(String email, String password, String name, String surname, int age, Set<Role> roles) {
+        this.email = email;
         this.password = password;
         this.name = name;
         this.surname = surname;
@@ -83,6 +85,11 @@ public class User implements UserDetails {
     }
 
     @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -94,4 +101,13 @@ public class User implements UserDetails {
     public int hashCode() {
         return Objects.hash(name, surname, age);
     }
+
+    public String getStringRole(){
+        StringBuilder userRoles = new StringBuilder();
+        for (Role role : roles) {
+            userRoles.append(role.getRole().substring(5)).append(" ");
+        }
+        return userRoles.toString();
+    }
+
 }

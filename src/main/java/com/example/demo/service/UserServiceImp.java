@@ -43,7 +43,7 @@ public class UserServiceImp implements UserService {
 
    @Override
    public void update(User user) {
-      User lastUser = userDao.getUserByUsername(user.getUsername());
+      User lastUser = userDao.getUserByUsername(user.getEmail());
       if (!lastUser.getPassword().equals(user.getPassword())) {
          user.setPassword(passwordEncoder.encode(user.getPassword()));
       }
@@ -60,13 +60,4 @@ public class UserServiceImp implements UserService {
       return userDao.getUserByUsername(username);
    }
 
-   @Override
-   public String getStringRolesByUsername(String username){
-      Set<Role> roles = userDao.getUserByUsername(username).getRoles();
-      StringBuilder userRoles = new StringBuilder();
-      for (Role role : roles) {
-         userRoles.append(role.getRole()).append(" ");
-      }
-      return userRoles.toString();
-   }
 }

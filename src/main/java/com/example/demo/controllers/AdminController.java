@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,15 +30,22 @@ public class AdminController {
     }
 
     @GetMapping()
-    public String index(ModelMap model){
+    public String info(@ModelAttribute("user") User user, ModelMap model, Principal principal){
+        model.addAttribute("authUser", userService.getUserByUsername(principal.getName()));
         model.addAttribute("users", userService.listUsers());
-        return "admin/index";
+        model.addAttribute("roles", roleService.getAllRoles());
+        return "admin/info";
     }
+
+//    @GetMapping()
+//    public String index(ModelMap model){
+//        model.addAttribute("users", userService.listUsers());
+//        return "admin/index";
+//    }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") Long id, ModelMap model){
         model.addAttribute("user", userService.getUserById(id));
-        model.addAttribute("roles", userService.getStringRolesByUsername(userService.getUserById(id).getUsername()));
         return "admin/show";
     }
 
@@ -50,7 +58,6 @@ public class AdminController {
     @PostMapping()
     public String create(@ModelAttribute("user") User user,
                          @RequestParam(value = "checkbox_roles", required = false) Long[] rolesId){
-
         Set<Role> roles = new HashSet<>();
         for (Long role : rolesId) {
             roles.add(roleService.getRoleById(role));
@@ -69,9 +76,7 @@ public class AdminController {
 
     @PatchMapping("/{id}")
     public String update(@PathVariable("id") Long id, @ModelAttribute("user") User user,
-                         @RequestParam(value = "checkbox_roles", required = false) Long[] rolesId,
-                         Model model){
-        model.addAttribute("roles", roleService.getAllRoles());
+                         @RequestParam(value = "checkbox_roles", required = false) Long[] rolesId){
         Set<Role> roles = new HashSet<>();
         for (Long role : rolesId) {
             roles.add(roleService.getRoleById(role));
@@ -80,6 +85,7 @@ public class AdminController {
         userService.update(user);
         return "redirect:/admin";
     }
+
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") Long id){
