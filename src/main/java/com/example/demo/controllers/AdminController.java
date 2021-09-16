@@ -37,11 +37,7 @@ public class AdminController {
         return "admin/info";
     }
 
-//    @GetMapping()
-//    public String index(ModelMap model){
-//        model.addAttribute("users", userService.listUsers());
-//        return "admin/index";
-//    }
+
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") Long id, ModelMap model){
