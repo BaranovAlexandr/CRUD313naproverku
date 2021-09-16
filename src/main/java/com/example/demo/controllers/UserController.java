@@ -15,18 +15,17 @@ public class UserController {
 
     private final UserService service;
 
-
     @Autowired
     public UserController(UserService service) {
         this.service = service;
     }
 
+
     @GetMapping("/user")
-    public String showuser(ModelMap model, Principal principal){
+    public String showuser(ModelMap model, Principal principal) {
         model.addAttribute("authUser", service.getUserByUsername(principal.getName()));
         return "users/show";
     }
-
 
 
 }

@@ -31,13 +31,10 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
-
-
 
     @Column(name = "name")
     private String name;
@@ -47,7 +44,6 @@ public class User implements UserDetails {
 
     @Column(name = "age")
     private int age;
-
 
 
     public User(String email, String password, String name, String surname, int age, Set<Role> roles) {
@@ -102,12 +98,11 @@ public class User implements UserDetails {
         return Objects.hash(name, surname, age);
     }
 
-    public String getStringRole(){
+    public String getStringRole() {
         StringBuilder userRoles = new StringBuilder();
         for (Role role : roles) {
             userRoles.append(role.getRole().substring(5)).append(" ");
         }
         return userRoles.toString();
     }
-
 }

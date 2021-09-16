@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class RoleServiceImp implements RoleService{
+public class RoleServiceImp implements RoleService {
 
     private final RoleDao roleDao;
 

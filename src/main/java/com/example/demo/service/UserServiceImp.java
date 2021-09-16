@@ -15,49 +15,47 @@ import java.util.Set;
 @Transactional
 public class UserServiceImp implements UserService {
 
+    private final PasswordEncoder passwordEncoder;
+    private final UserDao userDao;
 
-   private final PasswordEncoder passwordEncoder;
-   private final UserDao userDao;
+    @Autowired
+    public UserServiceImp(UserDao userDao, PasswordEncoder passwordEncoder) {
+        this.userDao = userDao;
+        this.passwordEncoder = passwordEncoder;
+    }
 
-   @Autowired
-   public UserServiceImp(UserDao userDao, PasswordEncoder passwordEncoder) {
-      this.userDao = userDao;
-      this.passwordEncoder = passwordEncoder;
-   }
+    @Override
+    public void add(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userDao.add(user);
+    }
 
-   @Override
-   public void add(User user) {
-      user.setPassword(passwordEncoder.encode(user.getPassword()));
-      userDao.add(user);
-   }
+    @Override
+    public List<User> listUsers() {
+        return userDao.listUsers();
+    }
 
-   @Override
-   public List<User> listUsers() {
-      return userDao.listUsers();
-   }
+    @Override
+    public User getUserById(Long id) {
+        return userDao.getUserById(id);
+    }
 
-   @Override
-   public User getUserById(Long id) {
-      return userDao.getUserById(id);
-   }
+    @Override
+    public void update(User user) {
+        User lastUser = userDao.getUserByUsername(user.getEmail());
+        if (!lastUser.getPassword().equals(user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+        userDao.update(user);
+    }
 
-   @Override
-   public void update(User user) {
-      User lastUser = userDao.getUserByUsername(user.getEmail());
-      if (!lastUser.getPassword().equals(user.getPassword())) {
-         user.setPassword(passwordEncoder.encode(user.getPassword()));
-      }
-      userDao.update(user);
-   }
+    @Override
+    public void delete(Long id) {
+        userDao.delete(id);
+    }
 
-   @Override
-   public void delete(Long id) {
-      userDao.delete(id);
-   }
-
-   @Override
-   public User getUserByUsername(String username) {
-      return userDao.getUserByUsername(username);
-   }
-
+    @Override
+    public User getUserByUsername(String username) {
+        return userDao.getUserByUsername(username);
+    }
 }

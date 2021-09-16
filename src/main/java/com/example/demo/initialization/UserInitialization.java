@@ -7,6 +7,7 @@ import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -37,10 +38,10 @@ public class UserInitialization implements CommandLineRunner {
         adminUserRoles.add(roleService.getRoleById(1L));
         adminUserRoles.add(roleService.getRoleById(2L));
 
-        userService.add(new User("alex@mail.com","alex","Alexandr","Baranov", 23, adminUserRoles));
+        userService.add(new User("alex@mail.com", "alex", "Alexandr", "Baranov", 23, adminUserRoles));
         userService.add(new User("admin@mail.com", "admin", "Admin", "Admin", 30, adminRoles));
         userService.add(new User("user@mail.com", "user", "user", "user", 20, userRoles));
-        userService.add(new User("SU@mail.com","SU","SimpleUser","SimpleUser", 22, userRoles));
+        userService.add(new User("SU@mail.com", "SU", "SimpleUser", "SimpleUser", 22, userRoles));
     }
 }
 
