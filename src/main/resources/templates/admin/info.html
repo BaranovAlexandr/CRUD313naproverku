@@ -84,6 +84,9 @@
                                                 </tbody>
                                             </table>
                                         </div>
+
+
+
                                     </div>
                                 </div>
                                 <!-- ПАНЕЛЬ создания нового юзера -->
@@ -94,39 +97,37 @@
                                             <div class="col-4">
                                             </div>
                                             <div class="col text-center">
-                                                <form class="text-center" th:method="POST" th:action="@{/admin}"
-                                                      th:object="${user}">
+                                                <form class="addForm">
                                                     <div class="form-group">
                                                         <div class="form-group col-md-4 text-center">
                                                             <label align="center" for="inputFirstname"><p
                                                                     class="font-weight-bold">First Name</p></label>
                                                             <input type="text" class="form-control" id="inputFirstname"
-                                                                   placeholder="First Name" th:field="*{name}">
+                                                                   placeholder="First Name" name="name">
                                                         </div>
                                                         <div class="form-group col-md-4 text-center">
                                                             <label for="inputLastname"><p class="font-weight-bold">Last
                                                                 Name</p></label>
                                                             <input type="text" class="form-control" id="inputLastname"
-                                                                   placeholder="Last Name" th:field="*{lastname}">
+                                                                   placeholder="Last Name" name="lastname">
                                                         </div>
                                                         <div class="form-group col-md-4 text-center">
                                                             <label for="inputAge"><p class="font-weight-bold">Age</p>
                                                             </label>
                                                             <input type="number" class="form-control" id="inputAge"
-                                                                   placeholder="Age"
-                                                                   th:field="*{age}">
+                                                                   placeholder="Age" name="age">
                                                         </div>
                                                         <div class="form-group col-md-4 text-center">
                                                             <label for="inputEmail"><p class="font-weight-bold">
                                                                 Email</p></label>
                                                             <input type="text" class="form-control" id="inputEmail"
-                                                                   placeholder="Email" th:field="*{email}">
+                                                                   placeholder="Email" name="email">
                                                         </div>
                                                         <div class="form-group col-md-4 text-center">
                                                             <label for="inputPassword"><p class="font-weight-bold">
                                                                 Password</p></label>
                                                             <input type="text" class="form-control" id="inputPassword"
-                                                                   placeholder="First Name" th:field="*{password}">
+                                                                   placeholder="Password" name="password">
                                                         </div>
                                                         <div class="form-group col-md-4 text-center">
                                                             <label for="inputRole"><p class="font-weight-bold">Role</p>
@@ -139,7 +140,6 @@
                                                             </select>
                                                         </div>
                                                         <div class="col-4">
-
                                                             <div class="text-center">
                                                                 <input class="btn btn-success " type="submit"
                                                                        value="Create!">

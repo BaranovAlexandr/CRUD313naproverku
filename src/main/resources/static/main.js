@@ -90,37 +90,37 @@ usersTable().then()
 //
 // })
 //
-// addPostForm.addEventListener('submit', async (e) => {
-//     e.preventDefault();
-//     console.log(document.getElementById('inputFirstname').value);
-//     await fetch("http://localhost:8080/api/users", {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({
-//             name: document.getElementById('inputFirstname').value,
-//             lastname: document.getElementById('inputLastname').value,
-//             age: document.getElementById('inputAge').value,
-//             email: document.getElementById('inputEmail').value,
-//             password: document.getElementById('inputPassword').value,
-//             // roles: document.getElementById('inputRole1').value
-//         })
-//     })
-//         .then( () => {
-//             document.getElementById('inputFirstname').value = '';
-//             document.getElementById('inputLastname').value = '';
-//             document.getElementById('inputAge').value = '';
-//             document.getElementById('inputEmail').value = '';
-//             document.getElementById('inputPassword').value = '';
-//             usersTable()
-//         })
-//
-// })
-//
-//
-//
-//
+addPostForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    console.log(document.getElementById('inputFirstname').value);
+    await fetch("http://localhost:8080/api/users", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            name: document.getElementById('inputFirstname').value,
+            lastname: document.getElementById('inputLastname').value,
+            age: document.getElementById('inputAge').value,
+            email: document.getElementById('inputEmail').value,
+            password: document.getElementById('inputPassword').value,
+            // roles: document.getElementById('inputRole1').value
+        })
+    })
+        .then( () => {
+            document.getElementById('inputFirstname').value = '';
+            document.getElementById('inputLastname').value = '';
+            document.getElementById('inputAge').value = '';
+            document.getElementById('inputEmail').value = '';
+            document.getElementById('inputPassword').value = '';
+            usersTable()
+        })
+
+})
+
+
+
+
 
 
 
