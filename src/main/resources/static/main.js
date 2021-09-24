@@ -24,8 +24,8 @@ async function usersTable() {
             "    <td>" + user.age + "</td>\n" +
             "    <td>" + user.email + "</td>\n" +
             "    <td>" + user.stringRole + "</td>\n" +
-            "    <td><button type=\"button\" class=\"btn btn-info\" data-bs-toggle=\"modal\" data-bs-target=\"#editModal\">Edit</button></td>\n" +
-            "    <td><button type=\"button\" class=\"btn btn-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#deleteModal\">Edit</button></td><tr>";
+            "    <td><button type=\"button\" class=\"btn btn-info\" data-toggle=\"modal\" data-target=\"#editModal\">Edit</button></td>\n" +
+            "    <td><button type=\"button\" class=\"btn btn-danger\" data-toggle=\"modal\" data-target=\"#deleteModal\">Edit</button></td><tr>";
     })
 
     document.getElementById("usersTable").innerHTML = output;
@@ -39,7 +39,8 @@ async function usersTable() {
             editForm.lastname.value = u.lastname
             editForm.age.value = u.age
             editForm.email.value = u.email
-        })
+            editForm.password.value = u.password
+         })
 
 
         const btnDelete = document.querySelector(`#dataId${u.id} .btn-danger`);
@@ -50,6 +51,7 @@ async function usersTable() {
             deleteForm.lastname.value = u.lastname
             deleteForm.age.value = u.age
             deleteForm.email.value = u.email
+            deleteForm.password.value = u.password
         })
     })
 }
@@ -57,39 +59,39 @@ async function usersTable() {
 usersTable().then()
 
 
-//
-// btnSub.addEventListener('click', async (e) =>{
-//     await fetch(url, {
-//         method : 'PATCH',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({
-//             id: document.getElementById('formId').value,
-//             name: document.getElementById('formFirstName').value,
-//             lastname: document.getElementById('formLastName').value,
-//             age: document.getElementById('formAge').value,
-//             email: document.getElementById('formEmail').value,
-//             password: document.getElementById('formPassword').value,
-//         })
-//     }).then(res => {
-//         res.json()
-//         usersTable()
-//     })
-// })
-//
-// btnDel.addEventListener('click', async (e) => {
-//     let id = document.getElementById('ID2').value;
-//     let delURL = url + '/' + id;
-//     await fetch(delURL,{
-//         method: 'DELETE'
-//     }).then((res) => {
-//         res.json()
-//         usersTable()
-//     })
-//
-// })
-//
+
+btnSub.addEventListener('click', async (e) =>{
+    await fetch(url, {
+        method : 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id: document.getElementById('editId').value,
+            name: document.getElementById('editName').value,
+            lastname: document.getElementById('editLastname').value,
+            age: document.getElementById('editAge').value,
+            email: document.getElementById('editEmail').value,
+            password: document.getElementById('editPassword').value,
+        })
+    }).then(res => {
+        res.json()
+        usersTable()
+    })
+})
+
+btnDel.addEventListener('click', async (e) => {
+    let id = document.getElementById('deleteId').value;
+    let delURL = url + '/' + id;
+    await fetch(delURL,{
+        method: 'DELETE'
+    }).then((res) => {
+        res.json()
+        usersTable()
+    })
+
+})
+
 addPostForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     console.log(document.getElementById('inputFirstname').value);

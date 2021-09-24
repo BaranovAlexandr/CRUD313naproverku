@@ -32,10 +32,10 @@ public class RestControllers {
         return userService.listUsers();
     }
 
-    @GetMapping("/roles")
-    public List<Role> getAllRoles() {
-        return roleService.getAllRoles();
-    }
+//    @GetMapping("/roles")
+//    public List<Role> getAllRoles() {
+//        return roleService.getAllRoles();
+//    }
 
     @GetMapping("/user")
     public User getPrincipal(Principal principal) {
