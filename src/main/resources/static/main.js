@@ -1,0 +1,126 @@
+
+const editForm = document.querySelector('.editForm')
+const btnSub = document.querySelector('.subBTN')
+
+const deleteForm = document.querySelector('.deleteForm')
+const btnDel = document.querySelector('.delBTN')
+
+const url = "http://localhost:8080/api/users";
+
+const addPostForm = document.querySelector('.addForm');
+
+
+async function usersTable() {
+    const response = await fetch(url);
+    const data = await response.json();
+    let output = '';
+
+    data.forEach((user) => {
+
+        output += "<tr id=" + 'dataId' + user.id + ">" +
+            "<td >" + user.id + "</td>\n" +
+            "    <td >" + user.name + "</td>\n" +
+            "    <td>" + user.lastname + "</td>\n" +
+            "    <td>" + user.age + "</td>\n" +
+            "    <td>" + user.email + "</td>\n" +
+            "    <td>" + user.stringRole + "</td>\n" +
+            "    <td><button type=\"button\" class=\"btn btn-info\" data-bs-toggle=\"modal\" data-bs-target=\"#editModal\">Edit</button></td>\n" +
+            "    <td><button type=\"button\" class=\"btn btn-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#deleteModal\">Edit</button></td><tr>";
+    })
+
+    document.getElementById("usersTable").innerHTML = output;
+
+    data.forEach(u => {
+        const btnEdit = document.querySelector(`#dataId${u.id} .btn-info`);
+        btnEdit.addEventListener('click', () => {
+
+            editForm.id.value = u.id
+            editForm.name.value = u.name
+            editForm.lastname.value = u.lastname
+            editForm.age.value = u.age
+            editForm.email.value = u.email
+        })
+
+
+        const btnDelete = document.querySelector(`#dataId${u.id} .btn-danger`);
+        btnDelete.addEventListener('click', () => {
+
+            deleteForm.id.value = u.id
+            deleteForm.name.value = u.name
+            deleteForm.lastname.value = u.lastname
+            deleteForm.age.value = u.age
+            deleteForm.email.value = u.email
+        })
+    })
+}
+
+usersTable().then()
+
+
+//
+// btnSub.addEventListener('click', async (e) =>{
+//     await fetch(url, {
+//         method : 'PATCH',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             id: document.getElementById('formId').value,
+//             name: document.getElementById('formFirstName').value,
+//             lastname: document.getElementById('formLastName').value,
+//             age: document.getElementById('formAge').value,
+//             email: document.getElementById('formEmail').value,
+//             password: document.getElementById('formPassword').value,
+//         })
+//     }).then(res => {
+//         res.json()
+//         usersTable()
+//     })
+// })
+//
+// btnDel.addEventListener('click', async (e) => {
+//     let id = document.getElementById('ID2').value;
+//     let delURL = url + '/' + id;
+//     await fetch(delURL,{
+//         method: 'DELETE'
+//     }).then((res) => {
+//         res.json()
+//         usersTable()
+//     })
+//
+// })
+//
+// addPostForm.addEventListener('submit', async (e) => {
+//     e.preventDefault();
+//     console.log(document.getElementById('inputFirstname').value);
+//     await fetch("http://localhost:8080/api/users", {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             name: document.getElementById('inputFirstname').value,
+//             lastname: document.getElementById('inputLastname').value,
+//             age: document.getElementById('inputAge').value,
+//             email: document.getElementById('inputEmail').value,
+//             password: document.getElementById('inputPassword').value,
+//             // roles: document.getElementById('inputRole1').value
+//         })
+//     })
+//         .then( () => {
+//             document.getElementById('inputFirstname').value = '';
+//             document.getElementById('inputLastname').value = '';
+//             document.getElementById('inputAge').value = '';
+//             document.getElementById('inputEmail').value = '';
+//             document.getElementById('inputPassword').value = '';
+//             usersTable()
+//         })
+//
+// })
+//
+//
+//
+//
+
+
+

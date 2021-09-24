@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -24,6 +25,7 @@ public class Role implements GrantedAuthority {
     @Column(name = "role", unique = true)
     private String role;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
     private Set<User> users = new HashSet<>();
 

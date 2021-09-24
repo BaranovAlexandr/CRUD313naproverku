@@ -39,18 +39,18 @@ public class User implements UserDetails {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "surname")
-    private String surname;
+    @Column(name = "lastname")
+    private String lastname;
 
     @Column(name = "age")
     private int age;
 
 
-    public User(String email, String password, String name, String surname, int age, Set<Role> roles) {
+    public User(String email, String password, String name, String lastname, int age, Set<Role> roles) {
         this.email = email;
         this.password = password;
         this.name = name;
-        this.surname = surname;
+        this.lastname = lastname;
         this.age = age;
         this.roles = roles;
     }
@@ -90,12 +90,12 @@ public class User implements UserDetails {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return age == user.age && Objects.equals(name, user.name) && Objects.equals(surname, user.surname);
+        return age == user.age && Objects.equals(name, user.name) && Objects.equals(lastname, user.lastname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname, age);
+        return Objects.hash(name, lastname, age);
     }
 
     public String getStringRole() {
