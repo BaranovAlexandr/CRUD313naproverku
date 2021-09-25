@@ -43,17 +43,14 @@ public class RestControllers {
     }
 
     @PostMapping("/users")
-    public User saveUser(@RequestBody User user
-//            ,@RequestParam(value = "checkbox_roles", required = false) Long[] rolesId) {
-//        Set<Role> roles = new HashSet<>();
-//        for (Long role : rolesId) {
-//            roles.add(roleService.getRoleById(role));
-//        }
-//        user.setRoles(roles);
-    ) {
+    public User saveUser(@RequestBody User user) {
         Set<Role> roles = new HashSet<>();
-        roles.add(roleService.getRoleById(1L));
-        roles.add(roleService.getRoleById(2L));
+        for (Role role : user.getRoles()) {
+            roles.add(roleService.getRoleByName(role.getRole()));
+        }
+
+//        roles.add(roleService.getRoleById(1L));
+//        roles.add(roleService.getRoleById(2L));
         user.setRoles(roles);
         userService.add(user);
         return user;

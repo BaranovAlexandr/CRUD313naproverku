@@ -32,38 +32,8 @@ public class AdminController {
     @GetMapping()
     public String info(@ModelAttribute("user") User user, ModelMap model, Principal principal) {
         model.addAttribute("authUser", userService.getUserByUsername(principal.getName()));
-        model.addAttribute("users", userService.listUsers());
         model.addAttribute("roles", roleService.getAllRoles());
         return "admin/info";
     }
 
-//    @PostMapping()
-//    public String create(@ModelAttribute("user") User user,
-//                         @RequestParam(value = "checkbox_roles", required = false) Long[] rolesId) {
-//        Set<Role> roles = new HashSet<>();
-//        for (Long role : rolesId) {
-//            roles.add(roleService.getRoleById(role));
-//        }
-//        user.setRoles(roles);
-//        userService.add(user);
-//        return "redirect:/admin";
-//    }
-//
-//    @PatchMapping("/{id}")
-//    public String update(@PathVariable("id") Long id, @ModelAttribute("user") User user,
-//                         @RequestParam(value = "checkbox_roles", required = false) Long[] rolesId) {
-//        Set<Role> roles = new HashSet<>();
-//        for (Long role : rolesId) {
-//            roles.add(roleService.getRoleById(role));
-//        }
-//        user.setRoles(roles);
-//        userService.update(user);
-//        return "redirect:/admin";
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public String delete(@PathVariable("id") Long id) {
-//        userService.delete(id);
-//        return "redirect:/admin";
-//    }
 }

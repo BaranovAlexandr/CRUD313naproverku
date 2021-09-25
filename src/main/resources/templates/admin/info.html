@@ -131,10 +131,10 @@
                                                             <label for="inputRole"><p class="font-weight-bold">Role</p>
                                                             </label>
                                                             <select id="inputRole" class="form-control" multiple
-                                                                    size="2" th:name="checkbox_roles">
+                                                                    size="2" name="roles">
                                                                 <option th:each="role : ${roles}"
-                                                                        th:value="${role.getId()}"
-                                                                        th:utext="${role.getRole()}"/>
+                                                                        th:value="${role.getRole()}"
+                                                                        th:utext="${role.getRole()}"></option>
                                                             </select>
                                                         </div>
                                                         <div class="col-4">
@@ -163,7 +163,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="p-3 mb-2 bg-white text-dark">
-                                        <table class="table table-hover" #table-striped>
+                                        <table class="table table-hover" >
                                             <tr>
                                                 <th scope="col">ID</th>
                                                 <th scope="col">First Name</th>
@@ -237,7 +237,7 @@
                                     <select id="deleteRole" name="role" class="form-control" multiple size="2"
                                             th:name="checkbox_roles" readonly>
                                         <option th:each="role : ${roles}"
-                                                th:value="${role.getId()}"
+                                                th:value="${role.getRole()}"
                                                 th:utext="${role.getRole()}"></option>
                                     </select>
                                 </div>

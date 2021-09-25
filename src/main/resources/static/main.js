@@ -94,7 +94,10 @@ btnDel.addEventListener('click', async (e) => {
 
 addPostForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    console.log(document.getElementById('inputFirstname').value);
+    let selected = Array.from(addPostForm.roles.options)
+        .filter(option => option.selected)
+        .map(option => option.value);
+
     await fetch("http://localhost:8080/api/users", {
         method: 'POST',
         headers: {
@@ -106,7 +109,7 @@ addPostForm.addEventListener('submit', async (e) => {
             age: document.getElementById('inputAge').value,
             email: document.getElementById('inputEmail').value,
             password: document.getElementById('inputPassword').value,
-            // roles: document.getElementById('inputRole1').value
+            roles: selected
         })
     })
         .then( () => {
@@ -115,6 +118,7 @@ addPostForm.addEventListener('submit', async (e) => {
             document.getElementById('inputAge').value = '';
             document.getElementById('inputEmail').value = '';
             document.getElementById('inputPassword').value = '';
+            selected = '';
             usersTable()
         })
 
