@@ -298,10 +298,10 @@
                                     <input type="text" class="form-control" id="editPassword" name="password"/>
                                 </div>
                                 <div class="form-group text-center">
-                                    <label for="EditRole"><p class="font-weight-bold">Role</p></label>
-                                    <select id="EditRole" name="role" class="form-control" multiple size="2" th:name="checkbox_roles">
+                                    <label for="editRole"><p class="font-weight-bold">Role</p></label>
+                                    <select id="editRole" name="roles" class="form-control" multiple size="2">
                                         <option th:each="role : ${roles}"
-                                                th:value="${role.getId()}"
+                                                th:value="${role.getRole()}"
                                                 th:utext="${role.getRole()}"></option>
                                     </select>
                                 </div>

@@ -1,4 +1,3 @@
-
 const editForm = document.querySelector('.editForm')
 const btnSub = document.querySelector('.subBTN')
 
@@ -61,6 +60,10 @@ usersTable().then()
 
 
 btnSub.addEventListener('click', async (e) =>{
+    e.preventDefault();
+    let selected1 = Array.from(editForm.roles.options)
+        .filter(option => option.selected)
+        .map(option => option.value);
     await fetch(url, {
         method : 'PATCH',
         headers: {
@@ -73,6 +76,7 @@ btnSub.addEventListener('click', async (e) =>{
             age: document.getElementById('editAge').value,
             email: document.getElementById('editEmail').value,
             password: document.getElementById('editPassword').value,
+            roles: selected1
         })
     }).then(res => {
         res.json()
@@ -81,6 +85,7 @@ btnSub.addEventListener('click', async (e) =>{
 })
 
 btnDel.addEventListener('click', async (e) => {
+    e.preventDefault();
     let id = document.getElementById('deleteId').value;
     let delURL = url + '/' + id;
     await fetch(delURL,{

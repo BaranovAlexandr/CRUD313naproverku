@@ -1,7 +1,6 @@
 package com.example.demo.controllers;
 
 
-import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import com.example.demo.service.RoleService;
 import com.example.demo.service.UserService;
@@ -11,8 +10,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.HashSet;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")

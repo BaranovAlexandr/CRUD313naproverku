@@ -32,10 +32,6 @@ public class RestControllers {
         return userService.listUsers();
     }
 
-//    @GetMapping("/roles")
-//    public List<Role> getAllRoles() {
-//        return roleService.getAllRoles();
-//    }
 
     @GetMapping("/user")
     public User getPrincipal(Principal principal) {
@@ -48,9 +44,6 @@ public class RestControllers {
         for (Role role : user.getRoles()) {
             roles.add(roleService.getRoleByName(role.getRole()));
         }
-
-//        roles.add(roleService.getRoleById(1L));
-//        roles.add(roleService.getRoleById(2L));
         user.setRoles(roles);
         userService.add(user);
         return user;
@@ -59,8 +52,9 @@ public class RestControllers {
     @PatchMapping("/users")
     public User updateUser(@RequestBody User user) {
         Set<Role> roles = new HashSet<>();
-        roles.add(roleService.getRoleById(1L));
-        roles.add(roleService.getRoleById(2L));
+        for (Role role : user.getRoles()) {
+            roles.add(roleService.getRoleByName(role.getRole()));
+        }
         user.setRoles(roles);
         userService.update(user);
         return user;
